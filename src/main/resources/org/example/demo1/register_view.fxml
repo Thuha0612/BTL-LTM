@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="org.example.demo1.ui.RegisterController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Label cho Tên đăng nhập -->
+    <Label text="Tên đăng nhập:"/>
+    <TextField fx:id="usernameField" GridPane.columnIndex="1"/>
+
+    <!-- Label cho Mật khẩu -->
+    <Label text="Mật khẩu:" GridPane.rowIndex="1"/>
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <!-- Nút Đăng Ký -->
+    <Button text="Đăng Ký" onAction="#handleRegister" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+
+    <!-- Nút Quay lại -->
+    <Button text="Quay lại" onAction="#handleBack" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+</GridPane>

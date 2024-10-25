@@ -1,0 +1,93 @@
+/* Navbar styling */
+.navbar {
+    -fx-background-color: #A0F0A0; /* Mint xanh nhẹ hơn */
+    -fx-padding: 5; /* Giảm padding cho thanh thoát hơn */
+}
+
+.navbar .label {
+    -fx-text-fill: #333;
+    -fx-font-size: 16px; /* Giảm kích thước chữ */
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+.navbar .button {
+    -fx-background-color: #68C68D;
+    -fx-text-fill: white;
+    -fx-font-size: 12px; /* Giảm kích thước chữ của nút */
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-padding: 5px 12px; /* Giảm padding nút */
+    -fx-border-radius: 15px; /* Tạo bo tròn mềm mại cho nút */
+}
+
+.navbar .button:hover {
+    -fx-background-color: #58B56E; /* Màu nút khi hover */
+}
+
+/* Table styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #68C68D; /* Đường viền mint mỏng hơn */
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px; /* Tạo bo tròn cho bảng */
+    -fx-padding: 15px; /* Thêm khoảng trống giữa bảng và viền */
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-width: 0 0 0.5px 0; /* Đường viền mỏng hơn giữa các dòng */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #F5F5F5; /* Màu nền dịu hơn cho các hàng lẻ */
+}
+
+/*.table-row-cell:hover {*/
+/*    -fx-background-color: #E0F5E0; !* Màu hover nhẹ hơn *!*/
+/*}*/
+
+/* Column header styling */
+.table-view .column-header {
+    -fx-background-color: #68C68D;
+    -fx-text-fill: white;
+    -fx-font-size: 14px; /* Giảm kích thước chữ cho tiêu đề */
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+/* Cell alignment */
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 6px; /* Giảm padding trong ô để gọn hơn */
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial";
+}
+
+/* Styling for the star in the user info */
+#userStarsLabel {
+    -fx-text-fill: yellow; /* Đổi màu ngôi sao thành vàng */
+    -fx-font-size: 18px; /* Kích thước chữ */
+    -fx-font-weight: bold;
+}
+
+/* Styling for results */
+.table-row-cell.win {
+    -fx-background-color: #CCFFCC; /* Màu xanh nhạt cho kết quả Win */
+    -fx-text-fill: black; /* Màu chữ là đen */
+}
+
+.table-row-cell.lose {
+    -fx-background-color: #D3D3D3; /* Màu xám cho kết quả Lose */
+    -fx-text-fill: black; /* Màu chữ là đen */
+}
+
+.table-row-cell.draw {
+    -fx-background-color: #FFFFCC; /* Màu vàng nhạt cho kết quả Draw */
+    -fx-text-fill: black; /* Màu chữ là đen */
+}
