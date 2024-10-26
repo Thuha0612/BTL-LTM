@@ -8,50 +8,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.geometry.Pos?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo1.ui.MatchHistoryController" stylesheets="@match_history_view.css">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo1.ui.MatchHistoryController" stylesheets="@match_history_view.css" prefWidth="1200" prefHeight="800">
     <children>
         <!-- Navbar -->
-        <AnchorPane layoutX="0" layoutY="0" prefHeight="50" prefWidth="600" styleClass="navbar">
+        <AnchorPane layoutX="0" layoutY="0" prefHeight="50" prefWidth="1200" styleClass="navbar" >
             <children>
-                <!-- User Info on the left -->
                 <Label fx:id="userNameLabel" layoutX="10" layoutY="14" text="PlayerName" />
                 <Label fx:id="userStarsLabel" layoutX="110" layoutY="14" text="★ 120" />
-
-                <!-- Home and Logout buttons on the right -->
-                <Button fx:id="homeButton" layoutX="450" layoutY="10" text="Home" />
-                <Button fx:id="logoutButton" layoutX="510" layoutY="10" text="Logout" />
+                <Button fx:id="homeButton" layoutX="1000" layoutY="10" text="Home" />
+                <Button fx:id="logoutButton" layoutX="1080" layoutY="10" text="Logout" />
             </children>
         </AnchorPane>
 
-        <!-- Pagination and Search Controls -->
-        <HBox layoutX="14.0" layoutY="64.0" spacing="10" alignment="CENTER" prefWidth="570">
-            <Label text="Rows per page:" />
-            <ComboBox fx:id="rowsPerPageComboBox" />
-            <Region HBox.hgrow="ALWAYS" /> <!-- Thành phần chiếm không gian giữa -->
-            <TextField fx:id="searchField" promptText="Search..." />
-            <ComboBox fx:id="filterByComboBox" promptText="Filter By" />
-        </HBox>
+        <!-- Main Content in Centered VBox -->
+<!--        alignment="CENTER"-->
+        <VBox spacing="10" AnchorPane.topAnchor="80" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150">
+            <HBox spacing="10" alignment="CENTER" >
+                <ComboBox fx:id="filterByComboBox" promptText="Filter By" />
+                <TextField fx:id="searchField" promptText="Search..." />
+            </HBox>
 
-        <!-- Table View -->
-        <TableView fx:id="matchHistoryTable" layoutX="14.0" layoutY="100.0" prefHeight="300" prefWidth="570">
-            <columns>
-                <TableColumn fx:id="idColumn" text="ID" />
-                <TableColumn fx:id="userIdColumn" text="User ID" />
-                <TableColumn fx:id="matchIdColumn" text="Match ID" />
-                <TableColumn fx:id="resultColumn" text="Result" />
-                <TableColumn fx:id="pointsEarnedColumn" text="Points Earned" />
-                <TableColumn fx:id="createdAtColumn" text="Created At" />
-            </columns>
-        </TableView>
 
-        <!-- Căn giữa cụm nút phân trang -->
-        <HBox layoutX="14.0" layoutY="410.0" spacing="10" alignment="CENTER" prefWidth="570">
-            <Region HBox.hgrow="ALWAYS" /> <!-- Thành phần chiếm không gian trước -->
-            <Button fx:id="previousPageButton" text="Previous" />
-            <Button fx:id="nextPageButton" text="Next" />
-            <Region HBox.hgrow="ALWAYS" /> <!-- Thành phần chiếm không gian sau -->
-        </HBox>
+            <!-- Table View -->
+            <AnchorPane>
+                <TableView fx:id="matchHistoryTable" prefWidth="960" prefHeight="800" tableMenuButtonVisible="false">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+                        <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="150" />
+                        <TableColumn fx:id="matchIdColumn" text="Match ID" prefWidth="150" />
+                        <TableColumn fx:id="resultColumn" text="Result" prefWidth="150" />
+                        <TableColumn fx:id="pointsEarnedColumn" text="Points Earned" prefWidth="150" />
+                        <TableColumn fx:id="createdAtColumn" text="Created At" prefWidth="200" />
+                    </columns>
+                </TableView>
+            </AnchorPane>
+        </VBox>
+
+        <!-- Pagination Controls at the Bottom -->
+        <HBox fx:id="paginationBox" spacing="5" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150" AnchorPane.bottomAnchor="10" alignment="CENTER" />
     </children>
 </AnchorPane>
+

@@ -1,93 +1,53 @@
 /* Navbar styling */
 .navbar {
-    -fx-background-color: #A0F0A0; /* Mint xanh nhẹ hơn */
-    -fx-padding: 5; /* Giảm padding cho thanh thoát hơn */
+    -fx-background-color: #2e3b4e;
+    -fx-padding: 10;
+    -fx-alignment: center-left;
 }
 
-.navbar .label {
-    -fx-text-fill: #333;
-    -fx-font-size: 16px; /* Giảm kích thước chữ */
-    -fx-font-family: "Arial";
-    -fx-font-weight: bold;
-}
-
-.navbar .button {
-    -fx-background-color: #68C68D;
+#userNameLabel, #userStarsLabel {
     -fx-text-fill: white;
-    -fx-font-size: 12px; /* Giảm kích thước chữ của nút */
-    -fx-font-family: "Arial";
-    -fx-font-weight: bold;
-    -fx-padding: 5px 12px; /* Giảm padding nút */
-    -fx-border-radius: 15px; /* Tạo bo tròn mềm mại cho nút */
+    -fx-font-size: 14px;
 }
 
-.navbar .button:hover {
-    -fx-background-color: #58B56E; /* Màu nút khi hover */
-}
-
-/* Table styling */
-.table-view {
-    -fx-background-color: white;
-    -fx-border-color: #68C68D; /* Đường viền mint mỏng hơn */
-    -fx-border-width: 1px;
-    -fx-border-radius: 10px; /* Tạo bo tròn cho bảng */
-    -fx-padding: 15px; /* Thêm khoảng trống giữa bảng và viền */
-}
-
-.table-view .table-column {
-    -fx-alignment: CENTER;
-}
-
-.table-view .table-row-cell {
-    -fx-background-color: white;
-    -fx-border-color: #ccc;
-    -fx-border-width: 0 0 0.5px 0; /* Đường viền mỏng hơn giữa các dòng */
-}
-
-.table-row-cell:odd {
-    -fx-background-color: #F5F5F5; /* Màu nền dịu hơn cho các hàng lẻ */
-}
-
-/*.table-row-cell:hover {*/
-/*    -fx-background-color: #E0F5E0; !* Màu hover nhẹ hơn *!*/
-/*}*/
-
-/* Column header styling */
-.table-view .column-header {
-    -fx-background-color: #68C68D;
+#homeButton, #logoutButton {
+    -fx-background-color: #f0ad4e;
     -fx-text-fill: white;
-    -fx-font-size: 14px; /* Giảm kích thước chữ cho tiêu đề */
-    -fx-font-family: "Arial";
-    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
 }
 
-/* Cell alignment */
-.table-view .table-cell {
-    -fx-alignment: CENTER;
-    -fx-padding: 6px; /* Giảm padding trong ô để gọn hơn */
-    -fx-font-size: 12px;
-    -fx-font-family: "Arial";
+#homeButton:hover, #logoutButton:hover {
+    -fx-background-color: #d98c34;
 }
 
-/* Styling for the star in the user info */
-#userStarsLabel {
-    -fx-text-fill: yellow; /* Đổi màu ngôi sao thành vàng */
-    -fx-font-size: 18px; /* Kích thước chữ */
-    -fx-font-weight: bold;
+/* Table styling for different match results */
+.table-row-cell:filled:selected {
+    -fx-background-color: #1a73e8 !important;
+    -fx-text-fill: white;
 }
 
-/* Styling for results */
-.table-row-cell.win {
-    -fx-background-color: #CCFFCC; /* Màu xanh nhạt cho kết quả Win */
-    -fx-text-fill: black; /* Màu chữ là đen */
+.table-row-cell:filled {
+    -fx-background-insets: 0;
 }
 
-.table-row-cell.lose {
-    -fx-background-color: #D3D3D3; /* Màu xám cho kết quả Lose */
-    -fx-text-fill: black; /* Màu chữ là đen */
+.table-row-cell:filled .table-cell {
+    -fx-padding: 5px;
 }
 
-.table-row-cell.draw {
-    -fx-background-color: #FFFFCC; /* Màu vàng nhạt cho kết quả Draw */
-    -fx-text-fill: black; /* Màu chữ là đen */
+.table-row-cell:filled:focused {
+    -fx-background-color: #cccccc;
+}
+
+.table-row-cell:filled .table-cell:focused {
+    -fx-background-color: transparent;
+}
+
+/* Styling for Win, Lose, and Draw rows */
+.table-row-cell:filled {
+    -fx-background-color: #ffffff;
+}
+
+.table-row-cell:filled:even {
+    -fx-background-color: #f9f9f9;
 }
