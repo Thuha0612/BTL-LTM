@@ -25,7 +25,7 @@
         <!-- Main Content in Centered VBox -->
 <!--        alignment="CENTER"-->
         <VBox spacing="10" AnchorPane.topAnchor="80" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150">
-            <HBox spacing="10" alignment="CENTER" >
+            <HBox spacing="10" alignment="BASELINE_RIGHT" AnchorPane.rightAnchor="50">
                 <ComboBox fx:id="filterByComboBox" promptText="Filter By" />
                 <TextField fx:id="searchField" promptText="Search..." />
             </HBox>
@@ -33,7 +33,7 @@
 
             <!-- Table View -->
             <AnchorPane>
-                <TableView fx:id="matchHistoryTable" prefWidth="960" prefHeight="800" tableMenuButtonVisible="false">
+                <TableView fx:id="matchHistoryTable" prefWidth="905" prefHeight="800" tableMenuButtonVisible="false">
                     <columns>
                         <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
                         <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="150" />

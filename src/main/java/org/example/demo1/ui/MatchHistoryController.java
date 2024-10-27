@@ -49,6 +49,15 @@ public class MatchHistoryController implements Initializable {
     private Button homeButton, logoutButton; // Nút điều hướng
     @FXML
     private HBox paginationBox;
+
+
+    @FXML
+    private void onPageChange() {
+        matchHistoryTable.scrollTo(0); // Đưa bảng về dòng đầu tiên
+        matchHistoryTable.layout();    // Cập nhật lại giao diện của bảng
+    }
+
+
     private ObservableList<MatchHistory> data;
     private ObservableList<MatchHistory> originalData; // Biến lưu trữ dữ liệu gốc
     private MockWebSocketClient webSocketClient;
@@ -173,7 +182,7 @@ public class MatchHistoryController implements Initializable {
         updateTableRows(); // Cập nhật hàng trong bảng để phản ánh dữ liệu tìm kiếm
     }
 
-    private static final int ROW_HEIGHT = 24; // Chiều cao của mỗi hàng
+    private static final int ROW_HEIGHT = 30; // Chiều cao của mỗi hàng
     private static final int MAX_ROWS = 20; // Số dòng tối đa
 
     private void updateTableRows() {
@@ -182,7 +191,8 @@ public class MatchHistoryController implements Initializable {
 
         // Nếu fromIndex vượt quá tổng số dữ liệu, không hiển thị hàng nào
         if (fromIndex >= totalDataSize) {
-            matchHistoryTable.setItems(FXCollections.observableArrayList()); // Bảng rỗng
+            matchHistoryTable.setItems(FXCollections.observableArrayList());
+            matchHistoryTable.setPrefHeight(MAX_ROWS * ROW_HEIGHT + 25); // Thiết lập chiều cao cố định khi không có dữ liệu
             return;
         }
 
@@ -195,9 +205,16 @@ public class MatchHistoryController implements Initializable {
         // Đặt dữ liệu cho bảng
         matchHistoryTable.setItems(pagedData);
 
-        // Điều chỉnh chiều cao bảng cho 20 hàng
-        int numberOfRowsToDisplay = Math.min(totalDataSize - fromIndex, MAX_ROWS); // Số dòng sẽ hiển thị
-        matchHistoryTable.setPrefHeight(numberOfRowsToDisplay * 30 + 25); // 75 là chiều cao bổ sung cho khoảng cách và các điều khiển
+        // Thiết lập chiều cao bảng với số dòng thực tế
+        int numberOfRowsToDisplay = Math.min(pagedData.size(), MAX_ROWS);
+        matchHistoryTable.setPrefHeight(numberOfRowsToDisplay * ROW_HEIGHT + 25); // 25 là phần bù cho khoảng cách và các điều khiển
+
+        // Đưa bảng về dòng đầu tiên và cập nhật layout
+        matchHistoryTable.scrollTo(0);
+        matchHistoryTable.layout();
+
+        // Cập nhật phân trang
         updatePagination();
     }
+
 }
