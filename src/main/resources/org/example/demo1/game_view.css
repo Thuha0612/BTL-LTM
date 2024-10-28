@@ -1,0 +1,54 @@
+.main-container {
+    -fx-padding: 20;
+    -fx-background-color: #f4f4f9;
+    -fx-pref-width: 1200; /* Set preferred width for the main container */
+    -fx-pref-height: 800; /* Set preferred height for the main container */
+}
+
+.navbar {
+    -fx-padding: 10;
+    -fx-background-color: #4a90e2;
+}
+
+.navbar-item {
+    -fx-font-size: 18px; /* Increase font size for better visibility */
+    -fx-text-fill: #ffffff;
+    -fx-padding: 0 10px;
+}
+
+.navbar-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4a90e2;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 5 15;
+}
+
+.status-bar {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 0 0 2 0;
+}
+
+.status-item {
+    -fx-font-size: 20px; /* Increase font size for better visibility */
+    -fx-text-fill: #333333;
+}
+
+.game-grid {
+    -fx-padding: 20;
+}
+
+.button-card {
+    -fx-min-width: 120; /* Increase minimum width for better appearance */
+    -fx-min-height: 80; /* Adjust height to maintain aspect ratio */
+    -fx-background-radius: 10;
+    -fx-background-color: #ff6f61;
+    -fx-font-size: 28px; /* Increase font size for card numbers */
+    -fx-text-fill: white;
+}
+
+.button-card:hover {
+    -fx-background-color: #ff856e;
+}

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo1.ui.MatchHistoryController" stylesheets="@match_history_view.css" prefWidth="1200" prefHeight="800">
     <children>
         <!-- Navbar -->
@@ -33,17 +34,20 @@
 
             <!-- Table View -->
             <AnchorPane>
-                <TableView fx:id="matchHistoryTable" prefWidth="905" prefHeight="800" tableMenuButtonVisible="false">
-                    <columns>
-                        <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
-                        <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="150" />
-                        <TableColumn fx:id="matchIdColumn" text="Match ID" prefWidth="150" />
-                        <TableColumn fx:id="resultColumn" text="Result" prefWidth="150" />
-                        <TableColumn fx:id="pointsEarnedColumn" text="Points Earned" prefWidth="150" />
-                        <TableColumn fx:id="createdAtColumn" text="Created At" prefWidth="200" />
-                    </columns>
-                </TableView>
+                <ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" pannable="false">
+                    <TableView fx:id="matchHistoryTable" prefWidth="905" prefHeight="800" tableMenuButtonVisible="false">
+                        <columns>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+                            <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="150" />
+                            <TableColumn fx:id="matchIdColumn" text="Match ID" prefWidth="150" />
+                            <TableColumn fx:id="resultColumn" text="Result" prefWidth="150" />
+                            <TableColumn fx:id="pointsEarnedColumn" text="Points Earned" prefWidth="150" />
+                            <TableColumn fx:id="createdAtColumn" text="Created At" prefWidth="200" />
+                        </columns>
+                    </TableView>
+                </ScrollPane>
             </AnchorPane>
+
         </VBox>
 
         <!-- Pagination Controls at the Bottom -->
