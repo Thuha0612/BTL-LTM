@@ -35,7 +35,7 @@
             <!-- Table View -->
             <AnchorPane>
                 <ScrollPane hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" pannable="false">
-                    <TableView fx:id="matchHistoryTable" prefWidth="905" prefHeight="800" tableMenuButtonVisible="false">
+                    <TableView fx:id="matchHistoryTable" prefWidth="905" prefHeight="900" tableMenuButtonVisible="false" styleClass="table">
                         <columns>
                             <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
                             <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="150" />

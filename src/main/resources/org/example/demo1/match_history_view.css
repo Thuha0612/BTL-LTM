@@ -1,6 +1,6 @@
 /* Navbar styling */
 .navbar {
-    -fx-background-color: #2e3b4e;
+    -fx-background-color: #1a5e47;
     -fx-padding: 10;
     -fx-alignment: center-left;
 }
@@ -10,13 +10,18 @@
     -fx-font-size: 14px;
 }
 
-#homeButton, #logoutButton {
-    -fx-background-color: #f0ad4e;
+#homeButton {
+    -fx-background-color: #ff801f;
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-cursor: hand;
 }
-
+#logoutButton{
+    -fx-background-color: #c90008;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
 #homeButton:hover, #logoutButton:hover {
     -fx-background-color: #d98c34;
 }
@@ -50,4 +55,13 @@
 
 .table-row-cell:filled:even {
     -fx-background-color: #f9f9f9;
+}
+.root {
+    -fx-background-color: #dedede; /* Màu nền tổng thể */
+}
+
+.table-cell {
+    -fx-alignment: CENTER; /* Căn giữa nội dung */
+
+
 }
