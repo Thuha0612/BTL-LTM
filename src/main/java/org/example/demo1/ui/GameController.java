@@ -1,5 +1,6 @@
 package org.example.demo1.ui;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -43,6 +44,7 @@ public class GameController {
 
         setupGameBoard();
         updateTimer();
+        createClockBlinkEffect();
     }
 
     private void updateTimer() {
@@ -177,5 +179,19 @@ public class GameController {
         exitAlert.setHeaderText("Do you want to exit the game?");
         exitAlert.setOnHidden(event -> showEndGameAlert("Opponent Wins!"));
         exitAlert.show();
+    }
+
+    @FXML
+    private Label clockIcon;
+
+
+
+    private void createClockBlinkEffect() {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), clockIcon);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.3);
+        fadeTransition.setCycleCount(FadeTransition.INDEFINITE);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.play();
     }
 }
