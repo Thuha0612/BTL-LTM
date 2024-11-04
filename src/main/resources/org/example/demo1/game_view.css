@@ -1,5 +1,5 @@
 .main-container {
-    -fx-padding: 20;
+    /*-fx-padding: 20;*/
     -fx-background-color: #f4f4f9;
     -fx-pref-width: 1200;
     -fx-pref-height: 800;
@@ -63,6 +63,7 @@
     -fx-min-width: 96;
     -fx-min-height: 144;
     -fx-background-radius: 10;
+    -fx-background-color: #f2f3e3 ;
     -fx-background-image: url(img/back.jpg);
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;

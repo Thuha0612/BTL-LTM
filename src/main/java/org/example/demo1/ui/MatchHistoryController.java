@@ -4,11 +4,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.example.demo1.MockWebSocketClient;
 import org.example.demo1.entity.MatchHistory;
 
@@ -124,19 +129,7 @@ public class MatchHistoryController implements Initializable {
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> performSearch());
 
-//        previousPageButton.setOnAction(event -> {
-//            if (currentPage > 0) {
-//                currentPage--;
-//                updateTableRows();
-//            }
-//        });
-//
-//        nextPageButton.setOnAction(event -> {
-//            if ((currentPage + 1) * rowsPerPage < data.size()) {
-//                currentPage++;
-//                updateTableRows();
-//            }
-//        });
+
 
         updateTableRows();
     }
@@ -192,7 +185,7 @@ public class MatchHistoryController implements Initializable {
         // Nếu fromIndex vượt quá tổng số dữ liệu, không hiển thị hàng nào
         if (fromIndex >= totalDataSize) {
             matchHistoryTable.setItems(FXCollections.observableArrayList());
-            matchHistoryTable.setPrefHeight(MAX_ROWS * ROW_HEIGHT + 25); // Thiết lập chiều cao cố định khi không có dữ liệu
+            matchHistoryTable.setPrefHeight(MAX_ROWS * ROW_HEIGHT + 30); // Thiết lập chiều cao cố định khi không có dữ liệu
             return;
         }
 
@@ -210,11 +203,38 @@ public class MatchHistoryController implements Initializable {
         matchHistoryTable.setPrefHeight(numberOfRowsToDisplay * ROW_HEIGHT + 25); // 25 là phần bù cho khoảng cách và các điều khiển
 
         // Đưa bảng về dòng đầu tiên và cập nhật layout
-        matchHistoryTable.scrollTo(0);
+//        matchHistoryTable.scrollTo(0);
         matchHistoryTable.layout();
 
         // Cập nhật phân trang
         updatePagination();
     }
 
+
+
+
+
+    //popup
+    @FXML
+    private void showPlayerInfoPopup() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/demo1/player_info_popup.fxml"));
+            Parent root = loader.load();
+
+            // Lấy dữ liệu người chơi từ server và truyền vào Controller của popup
+            PlayerInfoController controller = loader.getController();
+            controller.setPlayerInfo("PlayerName", 120, 5, 50, 30, 15, 5);
+
+            // Tạo và hiển thị popup
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Player Information");
+
+            Scene scene = new Scene(root, 300, 200); // Set kích thước popup
+            popupStage.setScene(scene);
+            popupStage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
