@@ -22,8 +22,8 @@
                 <Button fx:id="logoutButton" layoutX="1080" layoutY="10" text="Logout" />
             </children>
         </AnchorPane>
-        <!-- Nút mở popup thêm vào Navbar -->
-<!--        <Button fx:id="infoButton" layoutX="200" layoutY="10" text="Info" onAction="#showPlayerInfoPopup"/>-->
+<!--         Nút mở popup thêm vào Navbar -->
+        <Button fx:id="infoButton" layoutX="200" layoutY="10" text="Info" onAction="#showPlayerInfoPopup"/>
         <!-- Main Content in Centered VBox -->
 <!--        alignment="CENTER"-->
         <VBox spacing="10" AnchorPane.topAnchor="80" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150">
@@ -35,18 +35,21 @@
 
             <!-- Table View -->
             <AnchorPane>
-                <ScrollPane hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="false">
-                    <TableView fx:id="matchHistoryTable" prefWidth="903" prefHeight="900" tableMenuButtonVisible="false" styleClass="table">
-                        <columns>
-                            <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
-                            <TableColumn fx:id="userIdColumn" text="User ID" prefWidth="150" />
-                            <TableColumn fx:id="matchIdColumn" text="Match ID" prefWidth="150" />
-                            <TableColumn fx:id="resultColumn" text="Result" prefWidth="150" />
-                            <TableColumn fx:id="pointsEarnedColumn" text="Points Earned" prefWidth="150" />
-                            <TableColumn fx:id="createdAtColumn" text="Created At" prefWidth="200" />
-                        </columns>
-                    </TableView>
+                <ScrollPane fx:id="tableScrollPane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="false">
+                    <content>
+                        <TableView fx:id="matchHistoryTable" prefWidth="903" prefHeight="900" tableMenuButtonVisible="false" styleClass="table">
+                            <columns>
+                                <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+                                <TableColumn fx:id="userIdColumn" text="Competitor ID" prefWidth="150" />
+                                <TableColumn fx:id="matchIdColumn" text="Match ID" prefWidth="150" />
+                                <TableColumn fx:id="resultColumn" text="Result" prefWidth="150" />
+                                <TableColumn fx:id="pointsEarnedColumn" text="Points Earned" prefWidth="150" />
+                                <TableColumn fx:id="createdAtColumn" text="Created At" prefWidth="200" />
+                            </columns>
+                        </TableView>
+                    </content>
                 </ScrollPane>
+
             </AnchorPane>
 
         </VBox>

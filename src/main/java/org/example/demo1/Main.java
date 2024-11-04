@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("match_history_view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("practice_view.fxml"));
         primaryStage.setTitle("Match History");
         primaryStage.setScene(new Scene(root, 1200, 800));
         primaryStage.show();

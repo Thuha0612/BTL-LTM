@@ -70,20 +70,20 @@ public class MatchHistoryController implements Initializable {
 
     private int currentPage = 0;
     private final int rowsPerPage = 20; // Giá trị mặc định
-    private void updatePagination() {
-        paginationBox.getChildren().clear(); // Xóa các nút cũ
-        int totalPages = (int) Math.ceil((double) data.size() / rowsPerPage);
-
-        for (int i = 0; i < totalPages; i++) {
-            Button pageButton = new Button(String.valueOf(i + 1));
-            final int pageIndex = i; // Biến cục bộ để sử dụng trong lambda
-            pageButton.setOnAction(event -> {
-                currentPage = pageIndex;
-                updateTableRows();
-            });
-            paginationBox.getChildren().add(pageButton);
-        }
-    }
+//    private void updatePagination() {
+//        paginationBox.getChildren().clear(); // Xóa các nút cũ
+//        int totalPages = (int) Math.ceil((double) data.size() / rowsPerPage);
+//
+//        for (int i = 0; i < totalPages; i++) {
+//            Button pageButton = new Button(String.valueOf(i + 1));
+//            final int pageIndex = i; // Biến cục bộ để sử dụng trong lambda
+//            pageButton.setOnAction(event -> {
+//                currentPage = pageIndex;
+//                updateTableRows();
+//            });
+//            paginationBox.getChildren().add(pageButton);
+//        }
+//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -182,33 +182,48 @@ public class MatchHistoryController implements Initializable {
         int totalDataSize = data.size();
         int fromIndex = currentPage * rowsPerPage;
 
-        // Nếu fromIndex vượt quá tổng số dữ liệu, không hiển thị hàng nào
+        // Kiểm tra trường hợp không có dữ liệu để hiển thị
         if (fromIndex >= totalDataSize) {
             matchHistoryTable.setItems(FXCollections.observableArrayList());
-            matchHistoryTable.setPrefHeight(MAX_ROWS * ROW_HEIGHT + 30); // Thiết lập chiều cao cố định khi không có dữ liệu
+            matchHistoryTable.setPrefHeight(MAX_ROWS * ROW_HEIGHT + 25); // Đặt chiều cao cố định khi không có dữ liệu
             return;
         }
 
-        // Tính toIndex
+        // Tính toIndex để lấy dữ liệu trang hiện tại
         int toIndex = Math.min(fromIndex + rowsPerPage, totalDataSize);
-
-        // Lấy sublist với dữ liệu thực tế
         ObservableList<MatchHistory> pagedData = FXCollections.observableArrayList(data.subList(fromIndex, toIndex));
 
         // Đặt dữ liệu cho bảng
         matchHistoryTable.setItems(pagedData);
 
-        // Thiết lập chiều cao bảng với số dòng thực tế
-        int numberOfRowsToDisplay = Math.min(pagedData.size(), MAX_ROWS);
-        matchHistoryTable.setPrefHeight(numberOfRowsToDisplay * ROW_HEIGHT + 25); // 25 là phần bù cho khoảng cách và các điều khiển
+        // Cập nhật chiều cao bảng dựa trên số dòng hiển thị thực tế
+        int numberOfRowsToDisplay = Math.min(pagedData.size(), rowsPerPage);
+        matchHistoryTable.setPrefHeight(numberOfRowsToDisplay * ROW_HEIGHT + 25);
 
-        // Đưa bảng về dòng đầu tiên và cập nhật layout
-//        matchHistoryTable.scrollTo(0);
+        // Đặt bảng về dòng đầu tiên và cập nhật layout để tránh thanh cuộn
+        matchHistoryTable.scrollTo(0);
         matchHistoryTable.layout();
 
         // Cập nhật phân trang
         updatePagination();
     }
+
+    private void updatePagination() {
+        paginationBox.getChildren().clear();
+        int totalPages = (int) Math.ceil((double) data.size() / rowsPerPage);
+
+        for (int i = 0; i < totalPages; i++) {
+            Button pageButton = new Button(String.valueOf(i + 1));
+            final int pageIndex = i;
+            pageButton.setOnAction(event -> {
+                currentPage = pageIndex;
+                updateTableRows(); // Gọi lại updateTableRows khi chuyển trang
+            });
+            paginationBox.getChildren().add(pageButton);
+        }
+    }
+
+
 
 
 

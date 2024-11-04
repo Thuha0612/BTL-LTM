@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
@@ -17,7 +18,7 @@ import org.example.demo1.entity.Card;
 import java.util.Collections;
 import java.util.List;
 
-public class GameController {
+public class PracticeGameController {
     @FXML
     private Label usernameLabel, starsLabel, timeLabel, scoreLabel, pairsFlippedLabel;
     @FXML
@@ -26,36 +27,33 @@ public class GameController {
     private GridPane gameGrid;
     @FXML
     private Label opponentLabel, opponentScoreLabel;
-    private int timeLeft = 300;
+    private int timeLeft = 50; // Thay đổi theo thời gian bạn muốn
     private int score = 0;
     private int pairsFlipped = 0;
 
     private List<Card> cards;
     private Button firstCard = null;
     private Button secondCard = null;
-
     private MockWebSocketClient1 mockClient = new MockWebSocketClient1();
+    private Timeline timer;
 
     public void initialize() {
         usernameLabel.setText("Player1");
         starsLabel.setText("Stars: ★ 5");
-        opponentLabel.setText("Opponent: Player2");
-        opponentScoreLabel.setText("Opponent Score: 0");
-
         setupGameBoard();
-        updateTimer();
+        startTimer();
         createClockBlinkEffect();
     }
 
-    private void updateTimer() {
-        Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+    private void startTimer() {
+        timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             if (timeLeft > 0) {
                 timeLeft--;
                 int minutes = timeLeft / 60;
                 int seconds = timeLeft % 60;
                 timeLabel.setText(String.format("Time Left: %d:%02d", minutes, seconds));
             } else {
-                checkFinalScore();
+                endGame("Thời gian đã hết! Bạn thua!");
             }
         }));
         timer.setCycleCount(Timeline.INDEFINITE);
@@ -98,29 +96,26 @@ public class GameController {
                 pairsFlippedLabel.setText("Pairs Flipped: " + pairsFlipped);
 
                 mockClient.updatePlayerScore("Player1", 10);
-                opponentScoreLabel.setText("Opponent Score: " + mockClient.getPlayerScore("Player2"));
-
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                     firstCard.setVisible(false);
                     secondCard.setVisible(false);
                     checkGameStatus();
                 }));
-                timeline.setOnFinished(e -> {
-                    firstCard = null;
-                    secondCard = null;
-                });
+                timeline.setOnFinished(e -> resetSelectedCards());
                 timeline.play();
             } else {
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                     hideCards(firstCard, secondCard);
                 }));
-                timeline.setOnFinished(e -> {
-                    firstCard = null;
-                    secondCard = null;
-                });
+                timeline.setOnFinished(e -> resetSelectedCards());
                 timeline.play();
             }
         }
+    }
+
+    private void resetSelectedCards() {
+        firstCard = null;
+        secondCard = null;
     }
 
     private void showCard(Button card) {
@@ -142,49 +137,58 @@ public class GameController {
             secondCard.setStyle("");
         }
     }
+
     private boolean isGameWon() {
-        // Kiểm tra nếu số cặp thẻ đã lật bằng tổng số cặp thẻ
         return pairsFlipped == (cards.size() / 2);
     }
 
     private void checkGameStatus() {
         if (isGameWon()) {
-            // Đợi một chút để animation hoàn thành trước khi hiển thị Alert
-            PauseTransition pause = new PauseTransition(Duration.millis(200));
-            pause.setOnFinished(event -> showEndGameAlert("Chúc mừng! Bạn đã thắng trò chơi!"));
-            pause.play();
+            endGame("Chúc mừng! Bạn đã thắng!");
         }
     }
 
-    private void checkFinalScore() {
-        String result = mockClient.getPlayerScore("Player1") > mockClient.getPlayerScore("Player2") ?
-                "Player1 Wins!" : "Player2 Wins!";
-        showEndGameAlert(result);
-    }
-
-    private void showEndGameAlert(String message) {
+    private void endGame(String message) {
+        timer.stop();
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Game Over");
             alert.setHeaderText(null);
             alert.setContentText(message);
             alert.showAndWait();
+
+            // Hỏi người chơi có muốn chơi lại không
+            Alert replayAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            replayAlert.setTitle("Play Again");
+            replayAlert.setHeaderText("Bạn có muốn chơi lại không?");
+            replayAlert.setContentText("Chọn 'Có' để chơi lại, 'Không' để thoát.");
+            replayAlert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    resetGame();
+                } else {
+                    handleExitAction();
+                }
+            });
         });
+    }
+
+    private void resetGame() {
+        timeLeft = 50; // Reset thời gian
+        score = 0;
+        pairsFlipped = 0;
+        scoreLabel.setText("Score: " + score);
+        pairsFlippedLabel.setText("Pairs Flipped: " + pairsFlipped);
+        setupGameBoard();
+        startTimer();
     }
 
     @FXML
     private void handleExitAction() {
-        Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        exitAlert.setTitle("Exit Game");
-        exitAlert.setHeaderText("Do you want to exit the game?");
-        exitAlert.setOnHidden(event -> showEndGameAlert("Opponent Wins!"));
-        exitAlert.show();
+        Platform.exit(); // Hoặc xử lý thêm nếu cần
     }
 
     @FXML
     private Label clockIcon;
-
-
 
     private void createClockBlinkEffect() {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), clockIcon);

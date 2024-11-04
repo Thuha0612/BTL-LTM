@@ -16,11 +16,13 @@
 }
 
 #nameLabel, #starsLabel {
+    /*-fx-padding: 10;*/
     -fx-text-fill: #fbfffd; /* Custom color for name and stars */
 }
 
 /* Styling for other labels in the popup */
 #rankLabel, #matchesPlayedLabel, #matchesWonLabel, #matchesLostLabel, #matchesDrawnLabel {
+
     -fx-font-size: 16px;
     -fx-text-fill: #555;
 }
